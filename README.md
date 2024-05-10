@@ -15,10 +15,10 @@ Please make sure you have the right versions and download both packages. You can
 
 ```bash
 # Check Node.js version
-node --version
+node --version v20.3.0
 
 # Check Mongo version
-mongo --version
+mongo --versiondb version v7.0.8
 ```
 
 ### Instructions
