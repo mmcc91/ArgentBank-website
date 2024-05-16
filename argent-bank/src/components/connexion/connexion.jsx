@@ -1,7 +1,8 @@
 import React, { useState } from "react"; 
 import { useDispatch } from "react-redux"; 
 import { useNavigate } from "react-router-dom"; 
-import Button from "./../button"; 
+
+import Button from "../button/button"; 
 import "./connexion.scss"; 
 
 const Connexion = () => {
