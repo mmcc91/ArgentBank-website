@@ -83,8 +83,7 @@ const Connexion = () => {
 
   return (
     <div className="connexion">
-      <h1> Sign In COMPONNENT CONNEXION</h1>
-      <h2>Connexion</h2>
+      <h1> titre a modifier ou enlever Connexion</h1>
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>

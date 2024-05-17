@@ -10,6 +10,8 @@ import { Provider } from 'react-redux';
 // Création du contexte
 // Ceci est utilisé pour partager des données qui peuvent être considérées comme «globales» pour un arbre de composants React
 export const MyContext = createContext();
+// a changer pour redux
+
 
 // Création du reducer
 // Le reducer est une fonction qui détermine les modifications à apporter à l'état de l'application en réponse à une action
