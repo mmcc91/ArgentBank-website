@@ -1,17 +1,11 @@
 // Importation des dépendances nécessaires
-import React, { createContext, useReducer } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import User from "./pages/user";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-
-// Création du contexte
-// Ceci est utilisé pour partager des données qui peuvent être considérées comme «globales» pour un arbre de composants React
-export const MyContext = createContext();
-// a changer pour redux
-
 
 // Création du reducer
 // Le reducer est une fonction qui détermine les modifications à apporter à l'état de l'application en réponse à une action
@@ -40,7 +34,7 @@ function App() {
           </ul>
         </nav>
 
-        {/* // Utilisation du Router pour définir les différentes routes de l'application */}
+        {/* Utilisation du Router pour définir les différentes routes de l'application */}
         <Router>
           <Routes>
             <Route path="/home" element={<Home />} />
@@ -55,3 +49,4 @@ function App() {
 
 // Exportation du composant App pour qu'il puisse être utilisé dans d'autres fichiers
 export default App;
+
