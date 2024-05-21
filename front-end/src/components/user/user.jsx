@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import  "./user.scss";
 import Button from "../button/button";
 const User = () => {
   const username = useSelector(state =>(state.login.userProfil.userName))

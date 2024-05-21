@@ -1,3 +1,5 @@
+import "./navigation.scss";
+
 const Navigation = () => {
     <div>
         Ici barre de navigation COMPONNENT

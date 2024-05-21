@@ -1,4 +1,4 @@
-
+import "./banniere.scss";
 
 const Banniere = () => {
     <div className="banniere">
