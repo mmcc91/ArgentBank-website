@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import './header.scss';
 
 
-
 const Header = () => {
 
   
@@ -22,7 +21,7 @@ const Header = () => {
       <div>
         {!localStorage.getItem('token') ? (
           <a className="main-nav-item" href="login">
-            <i className="fa fa-user-circle"></i>
+            {/* <FontAwesomeIcon icon="fa-solid fa-circle-user" /> */}
             <span> </span>
             Sign In
           </a>

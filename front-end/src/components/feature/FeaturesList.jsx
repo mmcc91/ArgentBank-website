@@ -1,10 +1,11 @@
-import Feature from './feature.jsx'; // Assurez-vous que le chemin d'importation est correct
-import { features } from './../../Data/dataFeatures.json'; // Assurez-vous que le chemin d'importation est correct
+import Feature from './feature.jsx'; 
+import { features } from './../../Data/dataFeatures.json'; 
+
 
 const FeaturesList = () => {
   return (
     <section className="features">
-      <h2 className="sr-only">Features</h2>
+      {/* <h2 className="sr-only">Features</h2> retrait du titre pour coller au design fourni*/}
       {features.map((feature, index) => (
         <Feature
           key={"feature"+index} // Clé unique pour chaque élément de la liste

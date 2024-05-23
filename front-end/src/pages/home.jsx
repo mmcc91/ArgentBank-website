@@ -6,12 +6,13 @@ import FeaturesList from '../components/feature/FeaturesList';
 import Hero from "../components/hero/hero";
 
 
+
 const Home = () => {
   return (
     <main>
       <Header />
     <Hero />
-   <Feature />
+  
    <FeaturesList />
       <Footer />
     </main>
