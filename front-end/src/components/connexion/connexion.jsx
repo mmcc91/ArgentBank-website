@@ -1,8 +1,12 @@
 import React, { useState } from "react"; 
 import { useDispatch } from "react-redux"; 
 import { useNavigate } from "react-router-dom"; 
-import Button from "../button/button"; 
 import "./connexion.scss"; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+
+// Assurez-vous que loginUser et infoUser sont correctement importés
+// import { loginUser, infoUser } from 'path_to_actions';
 
 // Création du composant Connexion
 const Connexion = () => {
@@ -59,7 +63,8 @@ const Connexion = () => {
   const logUser = async (email, password) => {
     try {
       // Envoi de la requête à l'API
-      const response = await fetch("http://localhost:3001/api/user/login", {
+      const response = await fetch("http://localhost:3001/v1/user/login", {
+        // a verifier car pour le moment ne marche pas . reprise schema sophie bluel +chat gpt 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,50 +87,28 @@ const Connexion = () => {
   };
 
   return (
-    <div className="connexion">
-      <h1> titre a modifier ou enlever Connexion</h1>
-      <main className="main bg-dark">
-        <section className="sign-in-content">
-          <i className="fa fa-user-circle sign-in-icon"></i>
-          <h1>Sign In</h1>
-          <form onSubmit={handleLogin}>
-            <div className="input-wrapper">
-              <label htmlFor="userEmail">User Email</label>
-              <input
-                type="email"
-                id="userEmail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder=" exemple@gmail.com"
-                required
-              />
-            </div>
-            <div className="input-wrapper">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="input-remember">
-              <input
-                type="checkbox"
-                id="remember-me"
-                checked={rememberMe}
-                onChange={handleRememberMe}
-              />
-              <label htmlFor="remember-me">Remember me</label>
-            </div>
-            <Button btnText={"Sign In"} className={"sign-in-button"} /> 
-          </form>
-          {erreur && <p className="errorConexion">{erreur}</p>} 
-        </section>
-      </main>
-    </div>
+    <main className="main bg-dark">
+      <section className="sign-in-content">
+        <FontAwesomeIcon icon={faCircleUser} className="sign-in-icon" />
+        <h1>Sign In</h1>
+        <form onSubmit={handleLogin}>
+          <div className="input-wrapper">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" value={email} onChange={(event) => setEmail(event.target.value)} />
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+          </div>
+          <div className="input-remember">
+            <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} />
+            <label htmlFor="remember-me">Remember me</label>
+          </div>
+          <button className="sign-in-button">Sign In</button>
+          {erreur && <p className='error-message'>{erreur}</p>}
+        </form>
+      </section>     
+    </main>    
   );
 };
-
 export default Connexion;

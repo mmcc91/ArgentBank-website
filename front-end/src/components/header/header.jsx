@@ -3,7 +3,8 @@ import logo from './../../../designs/img/argentBankLogo.png';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import './header.scss';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
 
@@ -21,13 +22,13 @@ const Header = () => {
       <div>
         {!localStorage.getItem('token') ? (
           <a className="main-nav-item" href="login">
-            {/* <FontAwesomeIcon icon="fa-solid fa-circle-user" /> */}
+            <FontAwesomeIcon icon={faCircleUser} />
             <span> </span>
             Sign In
           </a>
         ) : (
           <div>
-            <i className="fa fa-user-circle"></i>
+      <FontAwesomeIcon icon={faCircleUser} />
             <span> </span>
             <a className="main-nav-item" href="user">{pseudo}</a>
             <span>- </span>

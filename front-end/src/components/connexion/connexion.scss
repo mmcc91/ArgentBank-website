@@ -1,11 +1,14 @@
 .sign-in-content {
-    box-sizing: border-box;
-    background-color: pink; // ici a remodifier en blanc 
-    width: 300px;
-    margin: 0 auto;
-    margin-top: 3rem;
-    padding: 2rem;
-  }
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+    margin-top: 0px;
+  margin-top: 3rem;
+  padding: 2rem;
+  color: #12002b; // ajout de cette ligne pour avoir le text en noir , sinon il est invisible 
+}
+  
   
   .sign-in-button {
     display: block;
@@ -50,4 +53,18 @@
   .input-wrapper input {
     padding: 5px;
     font-size: 1.2rem;
+  }
+  .bg-dark {
+    background-color: #12002b;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  .icon {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+      font-size: 14px;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
