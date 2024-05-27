@@ -1,3 +1,4 @@
+// Importation des modules nécessaires
 import React, { useState } from "react"; 
 import { useDispatch } from "react-redux"; 
 import { useNavigate } from "react-router-dom"; 
@@ -64,7 +65,7 @@ const Connexion = () => {
     try {
       // Envoi de la requête à l'API
       const response = await fetch("http://localhost:3001/v1/user/login", {
-        // a verifier car pour le moment ne marche pas . reprise schema sophie bluel +chat gpt 
+        // a verifier car pour le moment ne marche pas . reprise schema sophie bluel +
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,29 +87,47 @@ const Connexion = () => {
     setRememberMe(e.target.checked);
   };
 
+  // Rendu du composant
   return (
+    // Conteneur principal avec une classe pour le style
     <main className="main bg-dark">
+      {/* // Section pour le contenu de la connexion */}
       <section className="sign-in-content">
+        {/* // Icône pour la connexion */}
         <FontAwesomeIcon icon={faCircleUser} className="sign-in-icon" />
+        {/* // Titre de la page de connexion */}
         <h1>Sign In</h1>
+        {/* // Formulaire pour la connexion */}
         <form onSubmit={handleLogin}>
+          {/* // Conteneur pour l'input de l'email */}
           <div className="input-wrapper">
+            {/* // Label pour l'email */}
             <label htmlFor="email">Email</label>
+            {/* // Input pour l'email avec une fonction pour gérer les changements */}
             <input type="email" id="email" value={email} onChange={(event) => setEmail(event.target.value)} />
           </div>
+          {/* // Conteneur pour l'input du mot de passe */}
           <div className="input-wrapper">
+            {/* // Label pour le mot de passe */}
             <label htmlFor="password">Password</label>
+            {/* // Input pour le mot de passe avec une fonction pour gérer les changements */}
             <input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} />
           </div>
+          {/* // Conteneur pour l'input de la case à cocher "Se souvenir de moi" */}
           <div className="input-remember">
+            {/* // Input pour la case à cocher "Se souvenir de moi" avec une fonction pour gérer les changements */}
             <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} />
+            {/* // Label pour la case à cocher "Se souvenir de moi" */}
             <label htmlFor="remember-me">Remember me</label>
           </div>
+          {/* // Bouton pour soumettre le formulaire de connexion */}
           <button className="sign-in-button">Sign In</button>
+          {/* // Affichage conditionnel d'un message d'erreur si la variable erreur est vraie */}
           {erreur && <p className='error-message'>{erreur}</p>}
         </form>
       </section>     
     </main>    
   );
 };
+// Exportation du composant Connexion pour utilisation dans d'autres parties de l'application
 export default Connexion;

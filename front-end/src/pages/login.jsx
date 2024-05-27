@@ -6,7 +6,7 @@ import Connexion from "../components/connexion/connexion";
 
 const Login = () => {
   return (
-    <div>
+    <div className="page-login">
       <Header />
       <Connexion />
    
