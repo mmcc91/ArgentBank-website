@@ -1,7 +1,8 @@
 // Importation des modules nécessaires
 import React from "react";
-import { useSelector} from "react-redux";
+// import { useSelector} from "react-redux";
 import Logo from "../../../designs/img/argentBankLogo.png";
+import "./header.scss";
 
 const Header = () => {
   // const pseudo = useSelector((state) => state.userSlice.userProfil.userName);
@@ -17,7 +18,7 @@ const Header = () => {
         <img className="main-nav-logo-image" src={Logo} alt="Argent Bank Logo" />
         <h1 className="sr-only">Argent Bank</h1>
       </a>
-      <div>
+     
         {!localStorage.getItem("token") ? (
           <a className="main-nav-item" href="login">
             <i className="fa fa-user-circle"></i>
@@ -37,7 +38,7 @@ const Header = () => {
             </a>
           </div>
         )}
-      </div>
+     
     </nav>
   );
 };

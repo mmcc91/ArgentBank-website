@@ -1,10 +1,9 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "./types";
 
-/*Actions en cas de succès ou d'échec de la connexion et déconnexion*/
-export const loginSuccess = (token) => {
+export const loginSuccess = (user) => {
     return {
         type: LOGIN_SUCCESS,
-        payload: token,
+        payload: user,
     }
 }
 
@@ -19,4 +18,4 @@ export const logout = () => {
     return {
         type: LOGOUT,
     }
-} 
+}

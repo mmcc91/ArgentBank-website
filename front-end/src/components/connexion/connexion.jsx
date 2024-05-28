@@ -32,7 +32,7 @@ const Connexion = () => {
         const token = userData.body.token;
   
         // Dispatch de l'action loginUser avec le token en paramètre
-        await dispatch(loginUser(token));
+        await dispatch(logUser(token));
         
         // Si l'utilisateur a choisi de se souvenir de lui, on stocke le token dans le localStorage
         if (rememberMe) {
@@ -60,27 +60,33 @@ const Connexion = () => {
       }
     };
 
-  // Fonction pour gérer la connexion à l'API
-  const logUser = async (email, password) => {
-    try {
-      // Envoi de la requête à l'API
-      const response = await fetch("http://localhost:3001/v1/user/login", {
-        // a verifier car pour le moment ne marche pas . reprise schema sophie bluel +
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      // Récupération de la réponse en JSON
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      // Gestion des erreurs
-      console.error("Erreur lors de la connexion:", error);
-      throw error;
+// Fonction pour gérer la connexion à l'API
+const logUser = async (email, password) => {
+  try {
+    // Envoi de la requête à l'API
+    const response = await fetch("http://localhost:3001/api/v1/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    // Vérification du statut de la réponse
+    if (!response.ok) {
+      // Si le statut de la réponse n'est pas OK (200), on lance une erreur
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
+
+    // Récupération de la réponse en JSON
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Gestion des erreurs
+    console.error("Erreur lors de la connexion:", error);
+    throw error;
+  }
+};
 
   // Fonction pour gérer le choix de l'utilisateur de se souvenir de lui
   const handleRememberMe = (e) => {
