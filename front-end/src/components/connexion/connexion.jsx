@@ -50,7 +50,7 @@ const Connexion = () => {
           window.localStorage.setItem("token", token) // Stocke le token dans localStorage
         }
         if (token){ // Si le token est valide, redirige vers la page de profil
-          navigate('/profile');
+          navigate('/user');
         } else {
           const error = "Utilisateur inconnu" // Message d'erreur
           dispatch(loginFailed(error)); // Dispatch de l'action loginFailed avec le message d'erreur
