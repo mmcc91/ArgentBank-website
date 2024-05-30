@@ -2,7 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // Utilise localStorage pour le web par défaut
-import rootReducer from './index.js'
+import rootReducer from '../slices/userProfile'
 
 // Configuration de la persistance des données
 const persistConfig = {

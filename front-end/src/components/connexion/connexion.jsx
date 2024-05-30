@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./connexion.scss";
-import { loginSuccess } from '../../redux/slices/auth';
-import { loginFailed } from '../../redux/slices/auth';
-
-
+import { loginSuccess, loginFailed } from '../../redux/slices/userSlice';
 
 const Connexion = () => {
   // Etats pour les champs email et mot de passe
@@ -17,47 +14,49 @@ const Connexion = () => {
   // Etat pour la case "Remember me"
   const [rememberMe, setRememberMe] = useState(false); 
 
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (event) => {
     event.preventDefault(); // Empêche le rechargement de la page
-  
+
     // Vérifie si les champs email et mot de passe sont vides
     if (email === '' || password === '') {
       setErrorMessage('Les champs Email et mot de passe ne doivent pas être vides'); // Met à jour le message d'erreur
       return; // Arrête l'exécution de la fonction
     }
     console.log(`Email: ${email}, Password: ${password}`); // Affiche l'email et le mot de passe dans la console
-  
+
     try {
       // Envoie une requête à l'API
       const response = await fetch("http://localhost:3001/api/v1/user/login", {
         method: "POST", // Méthode POST
         headers: { "Content-Type": "application/json" }, // En-têtes de la requête
-        body: JSON.stringify({email, password}), // Corps de la requête
+        body: JSON.stringify({ email, password }), // Corps de la requête
       });
-  
+
       // Vérifie si la réponse est OK
       if (response.ok) {
         const data = await response.json(); // Récupère les données de la réponse
         const token = data.body.token; // Récupère le token de la réponse
         dispatch(loginSuccess(token)); // Dispatch de l'action loginSuccess pour mettre à jour le store Redux
-        window.sessionStorage.setItem("token", token) // Stocke le token dans sessionStorage
-        if (rememberMe) { // Si la case "Remember me" est cochée, utilise localStorage          
-          window.localStorage.setItem("token", token) // Stocke le token dans localStorage
+        window.sessionStorage.setItem("token", token); // Stocke le token dans sessionStorage
+        if (rememberMe) { // Si la case "Remember me" est cochée, utilise localStorage
+          window.localStorage.setItem("token", token); // Stocke le token dans localStorage
         }
-        if (token){ // Si le token est valide, redirige vers la page de profil
+        if (token) { // Si le token est valide, redirige vers la page de profil
           navigate('/user');
-        } else {
-          const error = "Utilisateur inconnu" // Message d'erreur
-          dispatch(loginFailed(error)); // Dispatch de l'action loginFailed avec le message d'erreur
         }
+      } else {
+        const error = "Utilisateur inconnu"; // Message d'erreur
+        setErrorMessage(error); // Met à jour le message d'erreur local
+        dispatch(loginFailed(error)); // Dispatch de l'action loginFailed avec le message d'erreur
       }
     } catch (error) {
       console.error(error); // Affiche l'erreur dans la console
+      setErrorMessage('Erreur de connexion'); // Met à jour le message d'erreur local
+      dispatch(loginFailed('Erreur de connexion')); // Dispatch de l'action loginFailed avec le message d'erreur
     }
   };
 
@@ -82,7 +81,7 @@ const Connexion = () => {
           <button className="sign-in-button">Sign In</button>
           {errorMessage && <p className='error-message'>{errorMessage}</p>}
         </form>
-      </section>     
+      </section>
     </main>    
   );
 };

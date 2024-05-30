@@ -6,16 +6,16 @@ import Button from "../button/button";
 import Account from "../account/account"; 
 import Accounts from "../../Data/dataAccount.json";
 
+
+
 // Définition du composant User
 const User = () => {
   // Récupération du nom d'utilisateur depuis le state Redux
-  const username = useSelector(state => {
-    // Ajoutez une vérification pour s'assurer que state.login et state.login.userProfil sont définis
-    if (state && state.login && state.login.userProfil) {
-      return state.login.userProfil.userName;
-    }
-    return null; // Retournez null si userName n'est pas défini
-  });
+  const username = useSelector(state => state?.login?.userProfil?.userName || null);
+
+  // Récupération du token utilisateur depuis le state Redux
+  // Assurez-vous que le chemin d'accès est correct
+  const userToken = useSelector(state => state?.login?.userToken || null);
 
   // Initialisation de la fonction navigate pour naviguer entre les routes
   const navigate = useNavigate();
@@ -35,11 +35,11 @@ const User = () => {
           <br />
           {username ? username : 'Guest'}!
         </h1>
-        {/* // Bouton pour afficher le formulaire de modification du nom d'utilisateur */}
+        {/* Bouton pour afficher le formulaire de modification du nom d'utilisateur */}
         <Button className={"edit-button"} btnText={"Edit Name"} onClick={handleDisplayEdit}></Button>
       </div>
       <h2 className="sr-only">Accounts</h2>
-      {/* // Affichage de la liste des comptes de l'utilisateur */}
+      {/* Affichage de la liste des comptes de l'utilisateur */}
       {Accounts.map((account, index) => (
         <Account
           key={"account" + index}

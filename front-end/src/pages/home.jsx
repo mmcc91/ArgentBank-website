@@ -12,7 +12,6 @@ const Home = () => {
     <main>
       <Header />
     <Hero />
-  
    <FeaturesList />
       <Footer />
     </main>
