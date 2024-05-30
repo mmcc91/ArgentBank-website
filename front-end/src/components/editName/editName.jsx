@@ -1,29 +1,24 @@
-// Importation des modules nécessaires
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUsername } from './../../redux/slices/user';
-import { useState } from 'react';
+import { updateUsername } from './../../redux/slices/userSlice';
 
-// Définition du composant EditName
 function EditName () {
-  // Initialisation des états locaux
-  const [display, setDisplay] = useState(true); // État pour gérer l'affichage du formulaire d'édition
-  const [userName, setUserName] = useState(''); // État pour gérer le nom d'utilisateur
+  const [display, setDisplay] = useState(true);
+  const [userName, setUserName] = useState('');
 
-  // Initialisation du dispatch pour envoyer des actions à Redux
   const dispatch = useDispatch();
 
-  // Fonction pour gérer la soumission du formulaire de modification du nom d'utilisateur
+  // Get the token from Redux state
+  const token = useSelector(state => state?.login?.userToken || null);
+
   const handleSubmitUsername = async (event) => {
     event.preventDefault();
 
-    // Vérification de la validité du nom d'utilisateur
     if (!userName) {
       console.log("Username is required");
       return;
     }
-    
-    // Tentative d'envoi de la requête de modification du nom d'utilisateur
+
     try {
       const response = await fetch('http://localhost:3001/api/v1/user/profile', {
         method: 'PUT',
@@ -33,27 +28,23 @@ function EditName () {
         },
         body: JSON.stringify({userName}),
       });
-    
-      // Vérification de la réponse de la requête
-      if (!response.ok) {
-        console.log("Invalid Fields");
-        return;
-      }    
-      
-      // Récupération et affichage des données de la réponse
-      const data = await response.json();
-      console.log(data);
-      console.log("userName:", userName);
 
-      // Dispatch de l'action updateUsername pour mettre à jour le nom d'utilisateur dans le store Redux    
-      dispatch(updateUsername(userName));
-      setDisplay(!display); // Changement de l'état d'affichage pour cacher le formulaire
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Dispatch the updateUsername action with the new username
+      dispatch(updateUsername(data.userName));
+
+      // Hide the form after successful submission
+      setDisplay(false);
 
     } catch (error) {
-      // Gestion des erreurs
-      console.error(error);
+      console.log("A problem occurred with the fetch operation: " + error.message);
     }
-  }
+  };
 
   // Rendu du composant
   return (

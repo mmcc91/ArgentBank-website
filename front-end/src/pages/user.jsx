@@ -6,8 +6,10 @@ import { userProfile } from '.././redux/slices/userProfile';
 import Header from '../components/header/header';
 import Account from '../components/account/account';
 import Footer from '../components/footer/footer';
+import EditName from '../components/editName/editName';
 import { useNavigate } from 'react-router-dom';
 import { getUserToken } from '../redux/slices/userSlice';
+import dataAccount from '../Data/dataAccount.json';
 
 const User = () => {
   const dispatch = useDispatch();
@@ -27,7 +29,12 @@ const User = () => {
   return (
     <div>
       <Header />
-      <Account />
+<EditName />
+      <Account
+        
+         amount={dataAccount.amount}
+         title={dataAccount.title}
+         description={dataAccount.description} />
       <Footer />
     </div>
   );

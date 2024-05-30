@@ -1,26 +1,25 @@
-// Définition du composant Account qui prend en entrée plusieurs props : title, type, accountnumber, amount et description
-const Account = ({ title, type, accountnumber, amount, description }) => {
-  return (
-    // Début du composant Account
-    <section className="account">
-      {/* // Conteneur pour le contenu du compte */}
-      <div className="account-content-wrapper">
-        {/* // Titre du compte, qui affiche le titre, le type et le numéro de compte */}
-        <h3 className="account-title">{title} {type} {accountnumber}</h3>
-        {/* // Montant du compte */}
-        <p className="account-amount">{amount}</p>
-        {/* // Description du montant du compte */}
-        <p className="account-amount-description">{description}</p>
-      </div>
-      {/* // Conteneur pour le bouton d'action */}
-      <div className="account-content-wrapper cta">
-        {/* // Bouton pour afficher les transactions */}
-        <button className="transaction-button">View transactions</button>
-      </div>
+import { PropTypes } from "prop-types";
+import Button from "../button/button";
 
-    </section>
+const Account = ({title = '', amount = '', description = ''}) => {
+  return (
+    <section className="account">
+        <div className="account-content-wrapper">
+          <h3 className="account-title">{title}</h3>
+          <p className="account-amount">{amount}</p>
+          <p className="account-amount-description">{description}</p>
+        </div>
+        <div className="account-content-wrapper cta">
+          <Button className={"transaction-button"} btnText={"View transactions"}></Button>
+        </div>
+      </section>
   );
 };
 
-// Exportation du composant Account pour utilisation dans d'autres parties de l'application
+Account.propTypes = {
+  title: PropTypes.string,
+  amount: PropTypes.string,
+  description: PropTypes.string,
+};
+
 export default Account;
