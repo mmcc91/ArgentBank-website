@@ -40,12 +40,15 @@ const Connexion = () => {
       if (response.ok) {
         const data = await response.json(); // Récupère les données de la réponse
         const token = data.body.token; // Récupère le token de la réponse
+
         dispatch(loginSuccess(token)); // Dispatch de l'action loginSuccess pour mettre à jour le store Redux
         window.sessionStorage.setItem("token", token); // Stocke le token dans sessionStorage
         if (rememberMe) { // Si la case "Remember me" est cochée, utilise localStorage
           window.localStorage.setItem("token", token); // Stocke le token dans localStorage
         }
-        if (token) { // Si le token est valide, redirige vers la page de profil
+        console.log(sessionStorage.getItem("token"))
+        if (sessionStorage.getItem("token")) { // Si le token est valide, redirige vers la page de profil
+          
           navigate('/user');
         }
       } else {

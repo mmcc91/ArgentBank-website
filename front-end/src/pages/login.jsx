@@ -9,7 +9,6 @@ const Login = () => {
     <div className="page-login">
       <Header />
       <Connexion />
-   
       <Footer />
     </div>
   );

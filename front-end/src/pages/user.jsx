@@ -17,7 +17,7 @@ const User = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
     if (token) {
       dispatch(getUserToken(token));
       dispatch(userProfile(token));
@@ -32,9 +32,10 @@ const User = () => {
 <EditName />
       <Account
         
-         amount={dataAccount.amount}
-         title={dataAccount.title}
-         description={dataAccount.description} />
+        //  amount={dataAccount.amount}
+        //  title={dataAccount.title}
+        //  description={dataAccount.description} 
+        />
       <Footer />
     </div>
   );

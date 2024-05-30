@@ -18,6 +18,7 @@ export const userProfile = createAsyncThunk(
       }
 
       const data = await response.json();
+     
       dispatch(getUserInfo(data.body));
     } catch (error) {
       console.error("A problem occurred with the fetch operation: ", error);

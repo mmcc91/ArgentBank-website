@@ -48,7 +48,7 @@ const Header = () => {
 
       // Dispatch de l'action pour mettre à jour le nom d'utilisateur dans le store Redux
       dispatch(getUserInfo({ ...userProfil, userName }));
-      setDisplay(!display);
+      // setDisplay(!display);
 
     } catch (error) {
       console.error(error);
