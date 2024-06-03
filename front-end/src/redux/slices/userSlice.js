@@ -30,9 +30,12 @@ export const userSlice = createSlice({
     loginSuccess: (state, action) => {
       state.userToken = action.payload;
       state.loginError = null;
-    },
+    },    
     loginFailed: (state, action) => {
       state.loginError = action.payload;
+    },
+    setUserInfo: (state, action) => {
+      state.userProfil = action.payload;
     },
     updateUsername: (state, action) => {
       state.userName = action.payload;
@@ -40,6 +43,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const { getUserToken, getUserInfo, cleanStore, loginSuccess, loginFailed, updateUsername } = userSlice.actions
+export const { getUserToken, getUserInfo, cleanStore, loginSuccess, loginFailed, updateUsername, setUserInfo } = userSlice.actions
 
 export default userSlice.reducer

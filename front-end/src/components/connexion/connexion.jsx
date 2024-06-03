@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./connexion.scss";
-import { loginSuccess, loginFailed } from '../../redux/slices/userSlice';
+import { loginSuccess, loginFailed, setUserInfo } from '../../redux/slices/userSlice';
 
 const Connexion = () => {
   // Etats pour les champs email et mot de passe
@@ -49,6 +49,20 @@ const Connexion = () => {
         console.log(sessionStorage.getItem("token"))
         if (sessionStorage.getItem("token")) { // Si le token est valide, redirige vers la page de profil
           
+          const userDetails = await fetch("http://localhost:3001/api/v1/user/profile", {
+            method: "POST",
+            headers: { "Content-Type": "application", "Authorization": `Bearer ${token}` },
+          })
+
+          if (!userDetails.ok) {
+            throw new Error(`HTTP error! status: ${userDetails.status}`);
+          }
+
+          const userData = await userDetails.json();
+          const {email, firstName, lastName, userName, createdAt, updatedAt, id} = userData.body;
+
+          dispatch(setUserInfo({email, firstName, lastName, userName, createdAt, updatedAt, id}))
+
           navigate('/user');
         }
       } else {

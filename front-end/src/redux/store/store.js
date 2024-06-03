@@ -2,7 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // Utilise localStorage pour le web par défaut
-import rootReducer from '../slices/userProfile'
+// import rootReducer from '../slices/userProfile'
 
 // Configuration de la persistance des données
 const persistConfig = {
@@ -11,7 +11,7 @@ const persistConfig = {
 }
 
 // Création d'un réducteur persistant à partir du réducteur racine et de la configuration de persistance
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer) // a voir si besoin de changer le nom de rootReducer
 
 // Création du store Redux
 const store = configureStore({
