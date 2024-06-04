@@ -20,7 +20,6 @@ const User = () => {
     const token = sessionStorage.getItem("token");
     if (token) {
       dispatch(getUserToken(token));
-      // dispatch(userProfile(token));
     } else {
       navigate('/login');
     }
@@ -29,13 +28,22 @@ const User = () => {
   return (
     <div>
       <Header />
-<EditName />
-      <Account
-        
-         amount={dataAccount.amount}
-         title={dataAccount.title}
-         description={dataAccount.description} 
-        />
+
+<main className="main bg-dark2">
+      <div className="header">
+      
+      <EditName />
+      </div>
+      <h2 className="sr-only">Accounts</h2>
+      {dataAccount.map((dataAccount, index) => (
+          <Account
+          key={"dataAccount"+index}
+          title={dataAccount.title}
+          amount={dataAccount.amount}
+          description={dataAccount.description}         
+          />
+         ))} 
+    </main>
       <Footer />
     </div>
   );

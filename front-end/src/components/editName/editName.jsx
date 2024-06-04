@@ -5,6 +5,7 @@ import { updateUsername } from './../../redux/slices/userSlice';
 function EditName () {
   const [display, setDisplay] = useState(true);
   const [userName, setUserName] = useState('');
+  const userData = useSelector((state) => state.user.userProfil);
 
   const dispatch = useDispatch();
 
@@ -54,15 +55,16 @@ function EditName () {
               <div>
                   <h1>Welcome back 
                       <br />
-                      {/* {userData.firstName} {userData.lastName} ! */}
+                      {userData.firstName} {userData.lastName} !
                   </h1>
                   <button className="edit-button" onClick={() => setDisplay(!display)}>Edit Name</button>
               </div>
               :
               // Si display est faux, affichage du formulaire d'édition
-              <div>
-                  <h2>Edit user info</h2>
+            
+               
                   <form>
+                   
                       <div className="edit-input">
                           <label htmlFor="username">User name:</label>
                           <input
@@ -95,7 +97,7 @@ function EditName () {
                           <button className="edit-username-button" onClick={() => setDisplay(!display)}>Cancel</button>
                       </div>
                   </form>
-              </div>
+          
           }
       </div>
   )

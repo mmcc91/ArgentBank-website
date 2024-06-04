@@ -1,7 +1,8 @@
 import { PropTypes } from "prop-types";
 import Button from "../button/button";
+import "./account.scss";
 
-const Account = ({title = '', amount = '', description = ''}) => {
+const Account = ({title,amount,description}) => {
   return (
     <section className="account">
         <div className="account-content-wrapper">
@@ -15,11 +16,9 @@ const Account = ({title = '', amount = '', description = ''}) => {
       </section>
   );
 };
-
 Account.propTypes = {
-  title: PropTypes.string,
-  amount: PropTypes.string,
-  description: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
 };
-
 export default Account;
