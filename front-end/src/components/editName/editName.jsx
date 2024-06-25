@@ -1,33 +1,41 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateUsername } from './../../redux/slices/userSlice';
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUsername } from "./../../redux/slices/userSlice";
+import "./editName.scss";
 
-function EditName () {
-  const [display, setDisplay] = useState(true);
-  const [userName, setUserName] = useState('');
+function EditName() {
+  const [display, setDisplay] = useState(false); // Modifiez cette ligne
   const userData = useSelector((state) => state.user.userProfil);
-
+  const token = useSelector((state) => state.user.userToken);
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
 
-  // Get the token from Redux state
-  const token = useSelector(state => state?.login?.userToken || null);
+  // Utilisez useEffect pour initialiser userName avec la valeur actuelle dès que userData est disponible ou modifié
+  const [userName, setUserName] = useState(userData.userName || "");
+
+useEffect(() => {
+  if (userData.userName) {
+    console.log("Mise à jour de userName avec :", userData.userName);
+    setUserName(userData.userName);
+  }
+}, [userData.userName]);
 
   const handleSubmitUsername = async (event) => {
     event.preventDefault();
-
     if (!userName) {
       console.log("Username is required");
+      setError("Username is required");
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-        method: 'PUT',
+      const response = await fetch("http://localhost:3001/api/v1/user/profile", {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({userName}),
+        body: JSON.stringify({ userName }),
       });
 
       if (!response.ok) {
@@ -35,73 +43,43 @@ function EditName () {
       }
 
       const data = await response.json();
-
-      // Dispatch the updateUsername action with the new username
-      dispatch(updateUsername(data.userName));
-
-      // Hide the form after successful submission
+      // debugger utlisé pour vérifier les valeurs de userName et data.body.userName et trouver l'erreur  de pourquoi le nom d'utilisateur n'estait pas affiche 
+      dispatch(updateUsername(data.body.userName));
       setDisplay(false);
-
     } catch (error) {
       console.log("A problem occurred with the fetch operation: " + error.message);
+      setError("A problem occurred with the fetch operation: " + error.message);
     }
   };
 
-  // Rendu du composant
   return (
-      <div className="header">
-          { display ? 
-              // Si display est vrai, affichage du message de bienvenue et du bouton d'édition
-              <div>
-                  <h1>Welcome back 
-                      <br />
-                      {userData.firstName} {userData.lastName} !
-                  </h1>
-                  <button className="edit-button" onClick={() => setDisplay(!display)}>Edit Name</button>
+    <div className="header">
+      <button className="edit-button" onClick={() => setDisplay(true)}>
+        Edit Name
+      </button>
+      {display && (
+        <div className="modal" onClick={() => setDisplay(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <form onSubmit={handleSubmitUsername}>
+              <div className="edit-input">
+                <label htmlFor="username">User name:</label>
+                <input type="text" id="username" value={userName} onChange={(event) => setUserName(event.target.value)} aria-label="User name" />
               </div>
-              :
-              // Si display est faux, affichage du formulaire d'édition
-            
-               
-                  <form>
-                   
-                      <div className="edit-input">
-                          <label htmlFor="username">User name:</label>
-                          <input
-                              type="text"
-                              id="username"
-                              defaultValue={userData.userName}
-                              onChange={(event) => setUserName(event.target.value)}
-                          />
-                      </div>
-                      <div className="edit-input">
-                          <label htmlFor="firstname">First name:</label>
-                          <input
-                              type="text"
-                              id="firstname" 
-                              defaultValue={userData.firstName}
-                              disabled={true}
-                          />
-                      </div>
-                      <div className="edit-input">
-                          <label htmlFor="lastname">Last name:</label>
-                          <input
-                              type="text"
-                              id="lastname" 
-                              defaultValue={userData.lastName}
-                              disabled={true}
-                          />
-                      </div>
-                      <div className="buttons">
-                          <button className="edit-username-button" onClick={handleSubmitUsername}>Save</button>
-                          <button className="edit-username-button" onClick={() => setDisplay(!display)}>Cancel</button>
-                      </div>
-                  </form>
-          
-          }
-      </div>
-  )
+              <div className="buttons">
+                <button type="submit" className="edit-username-button">
+                  Save
+                </button>
+                <button type="button" className="edit-username-button" onClick={() => setDisplay(false)}>
+                  Cancel
+                </button>
+              </div>
+              {error && <p className="error-message">{error}</p>}
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
-// Exportation du composant EditName pour utilisation dans d'autres parties de l'application
 export default EditName;

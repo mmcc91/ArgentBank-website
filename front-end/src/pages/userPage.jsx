@@ -10,6 +10,8 @@ import EditName from '../components/editName/editName';
 import { useNavigate } from 'react-router-dom';
 import { getUserToken } from '../redux/slices/userSlice';
 import dataAccount from '../Data/dataAccount.json';
+import  { useState } from 'react';
+
 
 const User = () => {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ const User = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
     const token = sessionStorage.getItem("token");
     if (token) {
       dispatch(getUserToken(token));

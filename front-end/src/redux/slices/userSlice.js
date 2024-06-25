@@ -38,7 +38,7 @@ export const userSlice = createSlice({
       state.userProfil = action.payload;
     },
     updateUsername: (state, action) => {
-      state.userName = action.payload;
+      state.userProfil.userName = action.payload;
     },
   },
 })

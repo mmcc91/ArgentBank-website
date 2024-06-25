@@ -1,34 +1,34 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom"; // Mise à jour pour react-router-dom@6
+
 import Logo from "../../../designs/img/argentBankLogo.png";
 import "./header.scss";
-import { getUserInfo, cleanStore } from '../../redux/slices/userSlice';
+import { updateUsername, cleanStore, setUserInfo } from '../../redux/slices/userSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
-
-  // Récupération du token et des données de l'utilisateur
+  const navigate = useNavigate(); // Utilisation avec react-router-dom@6
   const userToken = useSelector((state) => state.user.userToken);
   const userProfil = useSelector((state) => state.user.userProfil);
   
-  const [display, setDisplay] = useState(true);
   const [userName, setUserName] = useState('');
 
   const handleLogout = () => {
-    dispatch(cleanStore(null));
-    localStorage.removeItem("token");
+    dispatch(cleanStore());
+    localStorage.clear();
+    navigate('/home'); // Redirection avec navigate
   };
 
   const handleSubmitUsername = async (event) => {
     event.preventDefault();
-
     if (!userName) {
       console.log("Username is required");
       return;
     }
-
+  
     try {
-      const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+      const response = await fetch('https://localhost:3001/api/v1/user/profile', { // Vérification de l'URL sécurisée
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -36,20 +36,17 @@ const Header = () => {
         },
         body: JSON.stringify({ userName }),
       });
-
+  
       if (!response.ok) {
-        console.log("Invalid Fields");
+        console.log(`Error: ${response.status} ${response.statusText}`); // Message d'erreur amélioré
         return;
       }
-
+  
       const data = await response.json();
       console.log(data);
       console.log("userName:", userName);
-
-      // Dispatch de l'action pour mettre à jour le nom d'utilisateur dans le store Redux
-      dispatch(getUserInfo({ ...userProfil, userName }));
-      // setDisplay(!display);
-
+  
+      await dispatch(updateUsername(userName)); // Exemple d'utilisation de async/await avec dispatch
     } catch (error) {
       console.error(error);
     }
@@ -57,28 +54,23 @@ const Header = () => {
 
   return (
     <nav className="main-nav">
-      <a className="main-nav-logo" href="/">
+      <Link className="main-nav-logo" to="/home">
         <img className="main-nav-logo-image" src={Logo} alt="Argent Bank Logo" />
         <h1 className="sr-only">Argent Bank</h1>
-      </a>
-
+      </Link>
       {!userToken ? (
-        <a className="main-nav-item" href="login">
-          <i className="fa fa-user-circle"></i>
-          <span> </span>
-          Sign In
-        </a>
+        <Link className="main-nav-item" to="/login">
+          <i className="fa fa-user-circle"></i> Sign In
+        </Link>
       ) : (
         <div>
           <i className="fa fa-user-circle"></i>
-          <span> </span>
-          <a className="main-nav-item" href="user">
+          <Link className="main-nav-item" to="/user">
             {userProfil ? userProfil.userName : "User"}
-          </a>
-          <span>- </span>
-          <a className="main-nav-item" href="login" onClick={handleLogout}>
-            Sign Out
-          </a>
+          </Link>
+          <button onClick={handleLogout} className="main-nav-item">
+            <i className="fa fa-sign-out"></i> Sign Out
+          </button>
         </div>
       )}
     </nav>
