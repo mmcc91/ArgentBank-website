@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom"; // Mise à jour pour react-router-dom@6
 
-import Logo from "../../../designs/img/argentBankLogo.png";
+import Logo from "../../../designs/img/argentBankLogo.webp";
 import "./header.scss";
 import { updateUsername, cleanStore, setUserInfo } from '../../redux/slices/userSlice';
 
