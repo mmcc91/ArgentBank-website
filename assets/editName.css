@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .modal {
   position: fixed;
   top: 0;
@@ -16,6 +15,13 @@
   padding: 20px;
   border-radius: 5px;
   width: 50%;
-  /* Empêche le clic sur le modal de le fermer */
-  /* Ajoutez plus de styles ici selon vos besoins */
+}
+
+.edit-button {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px;
+  margin-bottom: 3%;
 }/*# sourceMappingURL=editName.css.map */

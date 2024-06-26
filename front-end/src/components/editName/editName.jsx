@@ -13,12 +13,12 @@ function EditName() {
   // Utilisez useEffect pour initialiser userName avec la valeur actuelle dès que userData est disponible ou modifié
   const [userName, setUserName] = useState(userData.userName || "");
 
-useEffect(() => {
-  if (userData.userName) {
-    console.log("Mise à jour de userName avec :", userData.userName);
-    setUserName(userData.userName);
-  }
-}, [userData.userName]);
+  useEffect(() => {
+    if (userData.userName) {
+      console.log("Mise à jour de userName avec :", userData.userName);
+      setUserName(userData.userName);
+    }
+  }, [userData.userName]);
 
   const handleSubmitUsername = async (event) => {
     event.preventDefault();
@@ -43,7 +43,7 @@ useEffect(() => {
       }
 
       const data = await response.json();
-      // debugger utlisé pour vérifier les valeurs de userName et data.body.userName et trouver l'erreur  de pourquoi le nom d'utilisateur n'estait pas affiche 
+      // debugger utlisé pour vérifier les valeurs de userName et data.body.userName et trouver l'erreur  de pourquoi le nom d'utilisateur n'estait pas affiche
       dispatch(updateUsername(data.body.userName));
       setDisplay(false);
     } catch (error) {
