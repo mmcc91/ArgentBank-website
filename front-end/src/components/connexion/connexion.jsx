@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Connexion.scss";
-import { loginSuccess, loginFailed, setUserInfo } from '../../redux/slices/userSlice';
+import { loginSuccess, loginFailed, setUserInfo } from "../../redux/slices/userSlice";
 
 const Connexion = () => {
   // Etats pour les champs email et mot de passe
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Etat pour la case "Remember me"
-  const [rememberMe, setRememberMe] = useState(false); 
+  const [rememberMe, setRememberMe] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,8 +22,8 @@ const Connexion = () => {
     event.preventDefault(); // Empêche le rechargement de la page
 
     // Vérifie si les champs email et mot de passe sont vides
-    if (email === '' || password === '') {
-      setErrorMessage('Les champs Email et mot de passe ne doivent pas être vides'); // Met à jour le message d'erreur
+    if (email === "" || password === "") {
+      setErrorMessage("Les champs Email et mot de passe ne doivent pas être vides"); // Met à jour le message d'erreur
       return; // Arrête l'exécution de la fonction
     }
     console.log(`Email: ${email}, Password: ${password}`); // Affiche l'email et le mot de passe dans la console
@@ -41,34 +41,36 @@ const Connexion = () => {
         const data = await response.json(); // Récupère les données de la réponse
         const token = data.body.token; // Récupère le token de la réponse
         dispatch(loginSuccess(token)); // Dispatch de l'action loginSuccess pour mettre à jour le store Redux
-        window.sessionStorage.setItem("token", token); // Stocke le token dans sessionStorage
+        window.localStorage.setItem("token", token); // Stocke le token dans localStorage
 
-        localStorage.setItem('userToken', token); // Enregistre le token dans le localStorage AJOUT POUR ENREGISTER LE TOKEN DANS LE LOCAL STORAGE
-
-
-
-        if (rememberMe) { // Si la case "Remember me" est cochée, utilise localStorage
+        if (rememberMe) {
+          // Si la case "Remember me" est cochée, utilise localStorage
           window.localStorage.setItem("token", token); // Stocke le token dans localStorage
         }
-        console.log(sessionStorage.getItem("token"))
+        console.log(localStorage.getItem("token"));
 
-        if (sessionStorage.getItem("token")) { // Si le token est valide, redirige vers la page de profil
-          
+        if (localStorage.getItem("token")) {
+          // Si le token est valide, redirige vers la page de profil
+
           const userDetails = await fetch("http://localhost:3001/api/v1/user/profile", {
             method: "POST",
-            headers: { "Content-Type": "application", "Authorization": `Bearer ${token}` },
-          })
+            headers: { "Content-Type": "application", Authorization: `Bearer ${token}` },
+          });
 
           if (!userDetails.ok) {
             throw new Error(`HTTP error! status: ${userDetails.status}`);
           }
 
           const userData = await userDetails.json();
-          const {email, firstName, lastName, userName, createdAt, updatedAt, id} = userData.body;
+          const { email, firstName, lastName, userName, createdAt, updatedAt, id } = userData.body;
 
-          dispatch(setUserInfo({email, firstName, lastName, userName, createdAt, updatedAt, id}))
+          const userProfil = { email, firstName, lastName, userName, createdAt, updatedAt, id };
 
-          navigate('/user');
+          dispatch(setUserInfo(userProfil));
+
+          window.localStorage.setItem("userProfil", JSON.stringify(userProfil));
+
+          navigate("/user");
         }
       } else {
         const error = "Utilisateur inconnu"; // Message d'erreur
@@ -77,8 +79,8 @@ const Connexion = () => {
       }
     } catch (error) {
       console.error(error); // Affiche l'erreur dans la console
-      setErrorMessage('Erreur de connexion'); // Met à jour le message d'erreur local
-      dispatch(loginFailed('Erreur de connexion')); // Dispatch de l'action loginFailed avec le message d'erreur
+      setErrorMessage("Erreur de connexion"); // Met à jour le message d'erreur local
+      dispatch(loginFailed("Erreur de connexion")); // Dispatch de l'action loginFailed avec le message d'erreur
     }
   };
 
@@ -101,10 +103,10 @@ const Connexion = () => {
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button className="sign-in-button">Sign In</button>
-          {errorMessage && <p className='error-message'>{errorMessage}</p>}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
       </section>
-    </main>    
+    </main>
   );
 };
 
