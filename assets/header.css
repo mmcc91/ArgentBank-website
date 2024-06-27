@@ -7,6 +7,7 @@
 .main-nav a {
   font-weight: bold;
   color: #2c3e50;
+  padding-left: 10px;
 }
 .main-nav a.router-link-exact-active {
   color: #42b983;

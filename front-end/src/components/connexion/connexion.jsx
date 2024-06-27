@@ -40,13 +40,18 @@ const Connexion = () => {
       if (response.ok) {
         const data = await response.json(); // Récupère les données de la réponse
         const token = data.body.token; // Récupère le token de la réponse
-
         dispatch(loginSuccess(token)); // Dispatch de l'action loginSuccess pour mettre à jour le store Redux
         window.sessionStorage.setItem("token", token); // Stocke le token dans sessionStorage
+
+        localStorage.setItem('userToken', token); // Enregistre le token dans le localStorage AJOUT POUR ENREGISTER LE TOKEN DANS LE LOCAL STORAGE
+
+
+
         if (rememberMe) { // Si la case "Remember me" est cochée, utilise localStorage
           window.localStorage.setItem("token", token); // Stocke le token dans localStorage
         }
         console.log(sessionStorage.getItem("token"))
+
         if (sessionStorage.getItem("token")) { // Si le token est valide, redirige vers la page de profil
           
           const userDetails = await fetch("http://localhost:3001/api/v1/user/profile", {

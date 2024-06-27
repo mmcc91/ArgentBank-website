@@ -33,7 +33,7 @@ const User = () => {
         <div className="header">
           <h1>
             Welcome back, <br />
-            {userProfil ? userProfil.userName : "User"}
+            {userProfil ? userProfil.userName : "User"} !
           </h1>
           <EditName />
         </div>
