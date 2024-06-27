@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import "./connexion.scss";
+import "./Connexion.scss";
 import { loginSuccess, loginFailed, setUserInfo } from '../../redux/slices/userSlice';
 
 const Connexion = () => {

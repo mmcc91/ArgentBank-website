@@ -1,18 +1,15 @@
-import React from 'react';
-import Footer from "../components/footer/footer";
-import Header from "../components/header/header";
-
-import FeaturesList from '../components/feature/FeaturesList';
-import Hero from "../components/hero/hero";
-
-
+import React from "react";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import FeaturesList from "../components/Feature/FeaturesList";
+import Hero from "../components/Hero/Hero";
 
 const Home = () => {
   return (
     <main>
       <Header />
-    <Hero />
-   <FeaturesList />
+      <Hero />
+      <FeaturesList />
       <Footer />
     </main>
   );

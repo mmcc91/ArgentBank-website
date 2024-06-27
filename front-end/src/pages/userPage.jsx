@@ -1,13 +1,13 @@
 // pages/User.jsx
 import React, { useEffect, useState } from "react"; // Combine useState import
 import { useSelector, useDispatch } from "react-redux";
-import Header from "../components/header/header";
-import Account from "../components/account/account";
-import Footer from "../components/footer/footer";
-import EditName from "../components/editName/editName";
+import Header from "../components/Header/Header";
+import Account from "../components/Account/Account";
+import Footer from "../components/Footer/Footer";
+import EditName from "../components/EditName/EditName";
 import { useNavigate } from "react-router-dom";
 import { getUserToken } from "../redux/slices/userSlice";
-import dataAccount from "../Data/dataAccount.json";
+import dataAccount from "../data/dataAccount.json";
 // import "../components/account/account.scss";
 
 const User = () => {
@@ -38,19 +38,9 @@ const User = () => {
           <EditName />
         </div>
         <h2 className="sr-only">Accounts</h2>
-        {dataAccount.map(
-          (
-            account,
-            index 
-          ) => (
-            <Account
-              key={"account" + index} 
-              title={account.title}
-              amount={account.amount}
-              description={account.description}
-            />
-          )
-        )}
+        {dataAccount.map((account, index) => (
+          <Account key={"account" + index} title={account.title} amount={account.amount} description={account.description} />
+        ))}
       </main>
       <Footer />
     </div>

@@ -1,5 +1,5 @@
 // Importation des modules nécessaires
-import "./feature.scss";
+import "./Feature.scss";
 import { PropTypes } from "prop-types";
 
 // Définition du composant Feature. Ce composant prend quatre props : paragraph, image, title et alt.

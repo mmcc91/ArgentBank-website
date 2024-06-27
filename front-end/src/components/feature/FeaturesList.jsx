@@ -1,5 +1,5 @@
-import Feature from './feature.jsx'; 
-import { features } from './../../Data/dataFeatures.json'; 
+import Feature from './Feature.jsx'; 
+import { features } from '../../data/dataFeatures.json'; 
 
 
 const FeaturesList = () => {

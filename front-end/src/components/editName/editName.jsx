@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUsername } from "./../../redux/slices/userSlice";
-import "./editName.scss";
+import { updateUsername } from "../../redux/slices/userSlice";
+import "./EditName.scss";
 
 function EditName() {
   const [display, setDisplay] = useState(false); // Modifiez cette ligne

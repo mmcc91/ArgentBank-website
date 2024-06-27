@@ -1,6 +1,6 @@
 import { PropTypes } from "prop-types";
-import Button from "../button/button";
-import "./account.scss";
+import Button from "../Button/Button";
+import "./Account.scss";
 
 const Account = ({title,amount,description}) => {
   return (

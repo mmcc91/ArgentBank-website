@@ -1,5 +1,5 @@
 // Importation du style spécifique au composant Hero
-import "./hero.scss";
+import "./Hero.scss";
 
 // Définition du composant Hero. Ce composant ne prend pas de props.
 const Hero = () => {

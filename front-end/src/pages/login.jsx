@@ -1,7 +1,8 @@
 import React from "react";
-import Footer from "../components/footer/footer";
-import Header from "../components/header/header";
-import Connexion from "../components/connexion/connexion";
+import Header from "../components/Header/Header";
+
+import Footer from "../components/Footer/Footer";
+import Connexion from "../components/Connexion/Connexion";
 
 
 const Login = () => {
