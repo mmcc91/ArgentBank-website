@@ -1,27 +1,59 @@
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  width: 50%;
-}
-
 .edit-button {
-  border-color: #00bc77;
   background-color: #00bc77;
-  color: #fff;
-  font-weight: 700;
-  padding: 10px;
-  margin-bottom: 3%;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.edit-content {
+  width: 33%;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: 33%;
+  text-align: center;
+}
+
+.edit-input {
+  margin-bottom: 15px;
+}
+
+.edit-input label {
+  text-align: left;
+}
+
+.edit-input input {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.edit-username-button {
+  background-color: #00bc77;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.edit-username-button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
 }/*# sourceMappingURL=editName.css.map */
