@@ -14,9 +14,18 @@ const Header = () => {
   
   const [userName, setUserName] = useState('');
 
+
+
+
   const handleLogout = () => {
+    const rememberMe = localStorage.getItem('rememberMe');
+    const email = localStorage.getItem('email');
     dispatch(cleanStore());
     localStorage.clear();
+    if (rememberMe === "true" && email !== null && email.length > 0) {
+      localStorage.setItem('rememberMe', rememberMe);
+      localStorage.setItem('email', email);
+    }
     navigate('/home'); // Redirection avec navigate
   };
 

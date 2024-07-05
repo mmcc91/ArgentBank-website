@@ -7,12 +7,16 @@ import { loginSuccess, loginFailed, setUserInfo } from "../../redux/slices/userS
 
 const Connexion = () => {
   // Etats pour les champs email et mot de passe
-  const [email, setEmail] = useState("");
+  const localrememberMe = localStorage.getItem("rememberMe");
+  const localemail = localStorage.getItem("email");
+  const shouldrememberMe = localrememberMe === "true" && localemail !== null && localemail.length > 0;
+
+  const [email, setEmail] = useState(shouldrememberMe ? localemail : "");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   // Etat pour la case "Remember me"
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(shouldrememberMe);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,10 +47,12 @@ const Connexion = () => {
         dispatch(loginSuccess(token)); // Dispatch de l'action loginSuccess pour mettre à jour le store Redux
         window.localStorage.setItem("token", token); // Stocke le token dans localStorage
 
-        if (rememberMe) {
+        if (rememberMe === true) {
           // Si la case "Remember me" est cochée, utilise localStorage
-          window.localStorage.setItem("token", token); // Stocke le token dans localStorage
+          window.localStorage.setItem("email", email); // Stocke le token dans localStorage
         }
+
+        window.localStorage.setItem("rememberMe", rememberMe);
         console.log(localStorage.getItem("token"));
 
         if (localStorage.getItem("token")) {
