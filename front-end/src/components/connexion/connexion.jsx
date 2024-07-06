@@ -7,22 +7,19 @@ import { loginSuccess, loginFailed, setUserInfo } from "../../redux/slices/userS
 
 const Connexion = () => {
   // Etats pour les champs email et mot de passe
-  const localrememberMe = localStorage.getItem("rememberMe");
-  const localemail = localStorage.getItem("email");
-  const shouldrememberMe = localrememberMe === "true" && localemail !== null && localemail.length > 0;
-
-  const [email, setEmail] = useState(shouldrememberMe ? localemail : "");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   // Etat pour la case "Remember me"
-  const [rememberMe, setRememberMe] = useState(shouldrememberMe);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (event) => {
+    const storage = rememberMe ? localStorage : sessionStorage; // Utilise localStorage si la case "Remember me" est cochée, sinon sessionStorage DEMANDE DE MENTOR DERNIER MENTORAT
     event.preventDefault(); // Empêche le rechargement de la page
 
     // Vérifie si les champs email et mot de passe sont vides
@@ -30,7 +27,7 @@ const Connexion = () => {
       setErrorMessage("Les champs Email et mot de passe ne doivent pas être vides"); // Met à jour le message d'erreur
       return; // Arrête l'exécution de la fonction
     }
-    console.log(`Email: ${email}, Password: ${password}`); // Affiche l'email et le mot de passe dans la console
+    // console.log(`Email: ${email}, Password: ${password}`); // Affiche l'email et le mot de passe dans la console
 
     try {
       // Envoie une requête à l'API
@@ -45,17 +42,11 @@ const Connexion = () => {
         const data = await response.json(); // Récupère les données de la réponse
         const token = data.body.token; // Récupère le token de la réponse
         dispatch(loginSuccess(token)); // Dispatch de l'action loginSuccess pour mettre à jour le store Redux
-        window.localStorage.setItem("token", token); // Stocke le token dans localStorage
+        storage.setItem("token", token); // Stocke le token dans LE storage
 
-        if (rememberMe === true) {
-          // Si la case "Remember me" est cochée, utilise localStorage
-          window.localStorage.setItem("email", email); // Stocke le token dans localStorage
-        }
+        console.log(storage.getItem("token"));
 
-        window.localStorage.setItem("rememberMe", rememberMe);
-        console.log(localStorage.getItem("token"));
-
-        if (localStorage.getItem("token")) {
+        if (storage.getItem("token")) {
           // Si le token est valide, redirige vers la page de profil
 
           const userDetails = await fetch("http://localhost:3001/api/v1/user/profile", {
@@ -74,7 +65,7 @@ const Connexion = () => {
 
           dispatch(setUserInfo(userProfil));
 
-          window.localStorage.setItem("userProfil", JSON.stringify(userProfil));
+          storage.setItem("userProfil", JSON.stringify(userProfil));
 
           navigate("/user");
         }

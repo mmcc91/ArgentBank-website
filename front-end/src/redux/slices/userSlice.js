@@ -7,14 +7,23 @@ const initialState = {
 }
 
 function initializeState() { // Récupération du jeton et du profil utilisateur depuis le localStorage
-  const token = localStorage.getItem("token")
-  const userProfil = localStorage.getItem("userProfil")
+  let token = null
+  let userProfil = null
+
+  if (localStorage.getItem("token")) {
+    token = localStorage.getItem("token")
+    userProfil = JSON.parse(localStorage.getItem("userProfil"))
+  } else if (sessionStorage.getItem("token")) {
+    token = sessionStorage.getItem("token")
+    userProfil = JSON.parse(sessionStorage.getItem("userProfil"))
+  }
+
   if (!token || !userProfil) {// Si le jeton ou le profil utilisateur n'existe pas, retourner l'état initial
     return initialState
   }
   // Mise à jour de l'état initial avec les valeurs récupérées
-  initialState.userToken = localStorage.getItem("token")
-  initialState.userProfil = JSON.parse(localStorage.getItem("userProfil"))// Conversion de la chaîne JSON en objet
+  initialState.userToken = token
+  initialState.userProfil = userProfil
   return initialState
 }
 

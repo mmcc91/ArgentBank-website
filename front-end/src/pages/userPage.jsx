@@ -18,7 +18,7 @@ const User = () => {
   const userProfil = useSelector((state) => state.user.userProfil);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = userToken;
     if (token) {
       dispatch(getUserToken(token));
     } else {

@@ -4,29 +4,21 @@ import { useNavigate, Link } from "react-router-dom"; // Mise à jour pour react
 
 import Logo from "../../../designs/img/argentBankLogo.webp";
 import "./Header.scss";
-import { updateUsername, cleanStore, setUserInfo } from '../../redux/slices/userSlice';
+import { updateUsername, cleanStore, setUserInfo } from "../../redux/slices/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Utilisation avec react-router-dom@6
   const userToken = useSelector((state) => state.user.userToken);
   const userProfil = useSelector((state) => state.user.userProfil);
-  
-  const [userName, setUserName] = useState('');
 
-
-
+  const [userName, setUserName] = useState("");
 
   const handleLogout = () => {
-    const rememberMe = localStorage.getItem('rememberMe');
-    const email = localStorage.getItem('email');
     dispatch(cleanStore());
     localStorage.clear();
-    if (rememberMe === "true" && email !== null && email.length > 0) {
-      localStorage.setItem('rememberMe', rememberMe);
-      localStorage.setItem('email', email);
-    }
-    navigate('/home'); // Redirection avec navigate
+    sessionStorage.clear();
+    navigate("/home"); // Redirection avec navigate
   };
 
   const handleSubmitUsername = async (event) => {
@@ -35,26 +27,27 @@ const Header = () => {
       console.log("Username is required");
       return;
     }
-  
+
     try {
-      const response = await fetch('https://localhost:3001/api/v1/user/profile', { // Vérification de l'URL sécurisée
-        method: 'PUT',
+      const response = await fetch("https://localhost:3001/api/v1/user/profile", {
+        // Vérification de l'URL sécurisée
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${userToken}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
         },
         body: JSON.stringify({ userName }),
       });
-  
+
       if (!response.ok) {
         console.log(`Error: ${response.status} ${response.statusText}`); // Message d'erreur amélioré
         return;
       }
-  
+
       const data = await response.json();
       console.log(data);
       console.log("userName:", userName);
-  
+
       await dispatch(updateUsername(userName)); // Exemple d'utilisation de async/await avec dispatch
     } catch (error) {
       console.error(error);
