@@ -22,9 +22,6 @@ function App() {
   return (
     <Provider store={store}>
       <div>
-        <nav></nav>
-
-        {/* Utilisation du Router pour définir les différentes routes de l'application */}
         <Router>
           <Routes>
             <Route path="/home" element={<Home />} />
