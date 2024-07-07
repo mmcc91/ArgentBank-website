@@ -15,8 +15,6 @@ h1 {
   box-sizing: border-box;
   text-align: left;
   margin-bottom: 2rem;
-
-
 }
 
 .account-amount {
@@ -71,12 +69,10 @@ h1 {
   .account {
     flex-direction: row;
   }
-
   .account-content-wrapper.cta {
     flex: 0;
   }
-
   .transaction-button {
     width: 200px;
   }
-}
+}/*# sourceMappingURL=User.css.map */

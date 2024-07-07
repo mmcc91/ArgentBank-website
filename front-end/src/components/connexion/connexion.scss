@@ -3,69 +3,72 @@
   background-color: white;
   width: 300px;
   margin: 0 auto;
-    margin-top: 0px;
+  margin-top: 0px;
   margin-top: 3rem;
   padding: 2rem;
   color: #12002b; // ajout de cette ligne pour avoir le text en noir , sinon il est invisible 
   text-align: center;
 }
-  
-  
-  .sign-in-button {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    border-color: #00bc77;
-    background-color: #00bc77;
-    color: #fff;
-    cursor: pointer;
-  }
-  .errorConexion{
-    color: red;
-    font-weight: bolder;
-  }
-  
-  .sign-in-icon {
-    font-size: 2rem;
-  }
-  
-  .input-remember {
-    display: flex;
-  }
-  
-  .input-remember label {
-    margin-left: 0.25rem;
-  }
-  
-  .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-bottom: 1rem;
-  }
-  
-  .input-wrapper label {
-    font-weight: bold;
-  }
-  
-  .input-wrapper input {
-    padding: 5px;
-    font-size: 1.2rem;
-  }
-  .bg-dark {
-    background-color: #12002b;
-    padding-top: 5%;
-    padding-bottom: 5%;
-  }
-  .icon {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-      font-size: 14px;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+
+
+.sign-in-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  cursor: pointer;
+}
+
+.errorConexion {
+  color: red;
+  font-weight: bolder;
+}
+
+.sign-in-icon {
+  font-size: 2rem;
+}
+
+.input-remember {
+  display: flex;
+}
+
+.input-remember label {
+  margin-left: 0.25rem;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.input-wrapper label {
+  font-weight: bold;
+}
+
+.input-wrapper input {
+  padding: 5px;
+  font-size: 1.2rem;
+}
+
+.bg-dark {
+  background-color: #12002b;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.icon {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 14px;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

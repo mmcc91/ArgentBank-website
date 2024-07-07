@@ -8,7 +8,6 @@ import EditName from "../components/EditName/EditName";
 import { useNavigate } from "react-router-dom";
 import { getUserToken } from "../redux/slices/userSlice";
 import dataAccount from "../data/dataAccount.json";
-// import "../components/account/account.scss";
 
 const User = () => {
   const dispatch = useDispatch();

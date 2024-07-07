@@ -21,10 +21,7 @@ const User = () => {
     <main className="main bg-dark2">
       <div className="header">
         {userAccounts.map((account, index) => (
-          <Account key={index}
-           title={account.title} 
-           amount={account.amount}
-            description={account.description} />
+          <Account key={index} title={account.title} amount={account.amount} description={account.description} />
         ))}
       </div>
     </main>

@@ -16,24 +16,34 @@ async function makeFetchRequest(url, method, headers = {}, body = null) {
 
 // Utilisation de la fonction utilitaire dans logUser
 export async function logUser(email, password) {
-  const userToken = await makeFetchRequest(`${process.env.REACT_APP_API_URL}/user/login`, "POST", {
-    "Content-Type": "application/json",
-  }, { email, password });
+  const userToken = await makeFetchRequest(
+    `${process.env.REACT_APP_API_URL}/user/login`,
+    "POST",
+    {
+      "Content-Type": "application/json",
+    },
+    { email, password }
+  );
   return userToken.body.token;
 }
 
 // Appliquer des modifications similaires pour fetchUserProfil et changeUsername
 export async function fetchUserProfil(token) {
   const userProfile = await makeFetchRequest(`${process.env.REACT_APP_API_URL}/user/profile`, "POST", {
-    "Authorization": `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
   });
   return userProfile.body;
 }
 
 export async function changeUsername(newUserName, token) {
-  const updatedUser = await makeFetchRequest(`${process.env.REACT_APP_API_URL}/user/profile`, "PUT", {
-    "Authorization": `Bearer ${token}`,
-    "Content-Type": "application/json",
-  }, { userName: newUserName });
+  const updatedUser = await makeFetchRequest(
+    `${process.env.REACT_APP_API_URL}/user/profile`,
+    "PUT",
+    {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    { userName: newUserName }
+  );
   return updatedUser;
 }

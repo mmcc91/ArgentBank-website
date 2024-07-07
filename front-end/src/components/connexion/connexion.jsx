@@ -20,7 +20,7 @@ const Connexion = () => {
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (event) => {
     const storage = rememberMe ? localStorage : sessionStorage; // Utilise localStorage si la case "Remember me" est cochée, sinon sessionStorage DEMANDE DE MENTOR DERNIER MENTORAT
-    event.preventDefault(); // Empêche le rechargement de la page
+    event.preventDefault();
 
     // Vérifie si les champs email et mot de passe sont vides
     if (email === "" || password === "") {

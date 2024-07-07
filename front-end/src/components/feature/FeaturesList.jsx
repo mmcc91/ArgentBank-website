@@ -1,6 +1,5 @@
-import Feature from './Feature.jsx'; 
-import { features } from '../../data/dataFeatures.json'; 
-
+import Feature from "./Feature.jsx";
+import { features } from "../../data/dataFeatures.json";
 
 const FeaturesList = () => {
   return (
@@ -8,7 +7,7 @@ const FeaturesList = () => {
       {/* <h2 className="sr-only">Features</h2> retrait du titre pour coller au design fourni*/}
       {features.map((feature, index) => (
         <Feature
-          key={"feature"+index} // Clé unique pour chaque élément de la liste
+          key={"feature" + index} // Clé unique pour chaque élément de la liste
           paragraph={feature.paragraph} // Paragraphe de la fonctionnalité
           image={feature.image} // Image de la fonctionnalité
           title={feature.title} // Titre de la fonctionnalité
